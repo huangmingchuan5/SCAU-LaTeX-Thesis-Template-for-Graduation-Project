@@ -1,0 +1,61 @@
+% template.tex (模板文件)
+% Email: mingchuanh617@gmail.com
+% contributor: Huang Mingchuan
+\usepackage{geometry}
+\usepackage{ctex} % 支持中文
+\usepackage{xcolor} % 支持颜色
+\usepackage{ulem} % 加入导言区
+
+\geometry{left=1cm, right=1cm, top=1cm, bottom=0.8cm}
+
+\definecolor{scauRed}{RGB}{200,0,0} % 定义 SCAU 红色
+
+
+\newcommand{\underlinefield}[1]{\underline{\makebox[#1]{\hspace*{\dimexpr#1-2\fboxsep-2\fboxrule}}}} % 带下划线的字段
+\newcommand{\customtitle}{} % 存储标题
+\newcommand{\settitle}[1]{\renewcommand{\customtitle}{#1}}
+\newcommand{\customdate}{} % 存储日期
+\newcommand{\setdate}[1]{\renewcommand{\customdate}{#1}}
+\newcommand{\customstuid}{} % 存储学号
+\newcommand{\setstuid}[1]{\renewcommand{\customstuid}{#1}}
+\newcommand{\customname}{} % 存储学号
+\newcommand{\setname}[1]{\renewcommand{\customname}{#1}}
+\newcommand{\customclass}{} % 存储学号
+\newcommand{\setclass}[1]{\renewcommand{\customclass}{#1}}
+
+% 封面命令
+\newcommand{\makecover}{
+    \color{scauRed}
+    \begin{center}
+        {\Huge \textbf{华南农业大学实验报告}} \\[-0.5em]
+        \rule{12cm}{2pt}
+    \end{center}
+
+    \vspace{2em}
+    
+
+    \begin{tabular}{llllll}
+     &  & \textbf{专业班次} & \makebox[3cm][c]{\uline{\hspace{0.4cm}{\customclass}\hspace{0.4cm}}} & \textbf{学号} & \makebox[3cm][c]{\uline{\hspace{0.1cm}{\customstuid}\hspace{0.1cm}}}  \\[1em]
+\textbf{题~~目} & \makebox[5cm][c]{\uline{\hspace{0.4cm}{\customtitle~~\textcolor{black}{(\thepage)}}\hspace{0.4cm}}} & \textbf{姓~~~~~名} & \makebox[3cm][c]{\uline{\hspace{1cm}{\customname}\hspace{1cm}}}  & \textbf{日期} & \makebox[3cm][c]{\uline{\hspace{0.4cm}{\customdate}\hspace{0.4cm}}}  \\[1em]
+    \end{tabular}
+
+    \color{black} % 恢复正文颜色为黑色
+}
+
+% 页脚命令
+\newcommand{\makefooter}{
+    \vfill
+    \noindent
+    \color{scauRed} % 设置页脚内容为红色
+    \rule{\linewidth}{2pt}
+    \vspace{-1cm}  % 负值将表格上移
+    \begin{center}
+       \begin{tabbing}
+        \hspace{8cm} \= \hspace{6cm} \= \kill  % 设置初始间距
+        \hspace{2cm}\textbf{成绩：}\> \textbf{教师：}\> \textbf{日期：}\\
+       \end{tabbing}
+    \end{center}
+
+
+
+}

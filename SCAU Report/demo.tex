@@ -1,0 +1,25 @@
+\documentclass{article}
+\usepackage{xcolor} % 为设置字体颜色
+\usepackage{fancyhdr} % For \today
+% 引入模板文件
+\input{template} % 或者 \include{template}
+\renewcommand{\today}{\number\month 月 \number\day 日}
+
+\begin{document}
+\settitle{\textbf{\large{\textcolor{black}{\LaTeX 使用手册}}}}
+\setdate{\textbf{\large{\textcolor{black}{\today}}}}
+\setstuid{\textbf{\large{\textcolor{black}{202234510000}}}}
+\setname{\textbf{\large{\textcolor{black}{残橘子}}}}
+\setclass{\textbf{\large{\textcolor{black}{22光信3班}}}}
+
+% 使用带参数的命令填写信息
+\makecover
+\section{示例}
+这是实验报告内容
+
+\vfill
+\makefooter
+\newpage
+\makecover
+\makefooter
+\end{document}
