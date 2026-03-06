@@ -1,0 +1,278 @@
+%使用XeLaTex或者LualaLaTex编译
+
+
+
+\documentclass[UTF8,AutoFakeBold=1,AutoFakeSlant,zihao=-4]{SCAU}
+\usepackage{graphicx} % 用于插入图片
+\usepackage{setspace} % 用于设置行距
+\usepackage{ctex} % 支持中文字体和字号设置
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break, const},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+
+
+%%%%%%%%%%%%%%%请在这里填写你的论文题目
+\newcommand{\thesisTitle}{SCAU论文 \LaTeX 使用手册}
+
+%%%%%%%%%%%%%%请在这里填写你的个人信息
+\newcommand{\yourDept}{电子工程学院}  %学院
+\newcommand{\yourMajor}{光电信息科学与工程}  %专业
+\newcommand{\yourName}{残橘子}     %名字
+\newcommand{\yourMentor}{张三}        %导师
+\newcommand{\yourjob}{校长}           %职称
+\newcommand{\studentID}{202200000000}   %学号
+\newcommand{\Date}{2026年1月10日}         %日期,也可以使用\zhtoday代替,即中文的当天年月日
+
+
+
+
+
+\begin{document}
+
+% 封面（自动生成）
+\coverpage      %%填写全部信息以确保no warning
+
+%如果你需要印双面,请注意留白
+%\newpage
+%\thispagestyle{empty}  % 设置空白页不显示页眉页脚
+%\mbox{}  % 生成一个空白页
+%\newpage
+
+
+\begin{authorization}
+%此处为原创性声明,不用填写.也不用删除
+\end{authorization}
+
+% 中文摘要
+\begin{abstract}
+本文详细介绍了如何使用 LaTeX 排版华南农业大学（SCAU）的学术论文。内容涵盖了 LaTeX 的基本使用方法、论文格式要求（如标题、目录、正文、参考文献等），以及常见问题的解决方案。本文特别针对 SCAU 论文的格式需求，提供了详细的代码示例和配置说明，包括如何设置中文字体、调整段落格式、插入图表、管理参考文献等。通过本手册，用户可以快速掌握 LaTeX 的使用技巧，高效完成符合 SCAU 标准的学术论文排版。
+\keywords{\LaTeX ；SCAU 论文；排版；参考文献；目录；插图}%填写中文关键词,使用全角分号隔开
+
+\end{abstract}
+
+
+
+% 英文摘要
+%%注意不要分开,否则报错;
+\begin{abstractEN}
+{A Comprehensive LaTeX Guide for SCAU Thesis Formatting}  % 论文英文标题
+{HurtOrange}  % 作者英文名
+{This article provides a comprehensive guide on using LaTeX to typeset academic papers for South China Agricultural University (SCAU). It covers the basic usage of LaTeX, formatting requirements for SCAU theses (such as titles, table of contents, main text, and references), and solutions to common issues. Specifically tailored to the formatting needs of SCAU theses, this manual offers detailed code examples and configuration instructions, including how to set Chinese fonts, adjust paragraph formatting, insert figures and tables, and manage references. With this guide, users can quickly master LaTeX and efficiently produce academic papers that meet SCAU's standards.}  % 英文摘要内容
+\keywordsEN{\LaTeX ; SCAU Thesis; Typesetting; References; Table of Contents; Figures}  % 英文关键词
+\end{abstractEN}
+
+% 目录（自动生成）,不用修改
+\contentpage
+
+
+
+%%%%%%%%%%%%%%%%%%%以下是正文部分%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{LaTeX 历史与特色}
+
+\subsection{TeX 的诞生}
+\subsubsection{Donald Knuth 的动机}
+Donald Knuth 是 TeX 的创始人。他在 1970 年代编写《计算机程序设计艺术》（The Art of Computer Programming）时，对当时的排版工具感到不满，尤其是数学公式的排版质量。当时的排版系统无法满足 Knuth 对高质量数学公式排版的要求，经常出现符号位置不当、间距不合适等问题。这促使他决定开发一种新的排版系统，能够实现高质量的数学公式和复杂文档排版。
+
+\subsubsection{TeX 的开发}
+Knuth 于 1978 年开始开发 TeX，并在 1982 年发布了第一个稳定版本。TeX 的设计目标是实现高质量的排版，特别是在数学公式和复杂文档方面。Knuth 花费了大量时间研究排版美学，制定了一系列排版规则，确保 TeX 生成的文档具有专业级的排版质量。TeX 采用了一种名为“自底向上”的设计方法，从底层开始构建，确保每个细节都经过精心设计和优化。
+
+\subsubsection{TeX 的特点}
+TeX 具有以下几个显著特点：
+\begin{itemize}
+    \item 高质量的数学公式排版能力
+    \item 精确的字符定位和间距控制
+    \item 强大的宏编程能力
+    \item 跨平台兼容性
+    \item 免费开源
+\end{itemize}
+
+TeX 的出现彻底改变了学术出版领域，尤其是数学、物理、计算机科学等需要大量数学公式的学科。
+
+\subsection{LaTeX 的出现}
+\subsubsection{Leslie Lamport 的贡献}
+Leslie Lamport 在 1980 年代基于 TeX 开发了 LaTeX。LaTeX 提供了更高层次的抽象，使得用户可以专注于文档内容，而不必过多关注排版细节。Lamport 设计了一套宏包和命令，使得用户可以通过简单的命令来生成复杂的文档结构，如章节标题、列表、表格、图片等。
+
+\subsubsection{LaTeX 的普及}
+LaTeX 的易用性和强大功能使其迅速在学术界和科研领域普及，成为撰写学术论文、书籍和技术文档的首选工具。LaTeX 不仅继承了 TeX 高质量的排版能力，还提供了更便捷的文档结构管理功能，使得用户可以更容易地生成符合学术规范的文档。
+
+\subsubsection{LaTeX 与 TeX 的关系}
+LaTeX 是建立在 TeX 之上的宏包系统，它扩展了 TeX 的功能，提供了更高级的文档排版命令。用户使用 LaTeX 编写文档，最终仍然通过 TeX 引擎编译生成 PDF 或其他格式的文档。简单来说，TeX 是底层的排版引擎，而 LaTeX 是基于 TeX 的文档排版系统。
+
+\subsection{LaTeX 的发展}
+\subsubsection{LaTeX2e 的发布}
+1994 年，LaTeX2e 发布，成为 LaTeX 的当前标准版本。LaTeX2e 引入了许多新功能和改进，进一步提升了 LaTeX 的灵活性和易用性。LaTeX2e 采用了模块化的设计，允许用户通过加载不同的宏包来扩展功能，如图形处理、表格排版、参考文献管理等。
+
+\subsubsection{LaTeX 社区的发展}
+LaTeX 的成功离不开全球用户和开发者的支持。许多宏包和工具被开发出来，扩展了 LaTeX 的功能，使其能够满足各种排版需求。例如，graphicx 宏包用于插入图片，booktabs 宏包用于美化表格，bibtex 和 biblatex 用于参考文献管理等。
+
+\subsubsection{LaTeX 的未来方向}
+随着技术的发展，LaTeX 仍在不断进化。新的工具和集成环境（如 Overleaf、TeXstudio 等）使得 LaTeX 更加易于使用，同时也保持了其高质量排版的核心优势。此外，LaTeX 社区也在不断开发新的宏包和功能，以适应现代文档排版的需求，如支持 HTML 和 EPUB 输出、增强图形处理能力等。
+
+\paragraph{社区的支持}
+LaTeX 的成功离不开全球用户和开发者的支持。许多宏包和工具被开发出来，扩展了 LaTeX 的功能，使其能够满足各种排版需求。例如，CTAN（Comprehensive TeX Archive Network）是全球最大的 TeX 和 LaTeX 资源库，包含了数万个宏包和文档模板，为用户提供了丰富的资源支持。
+
+\paragraph{未来的方向}
+随着技术的发展，LaTeX 仍在不断进化。新的工具和集成环境（如 Overleaf、TeXstudio 等）使得 LaTeX 更加易于使用，同时也保持了其高质量排版的核心优势。此外，LaTeX 社区也在不断开发新的宏包和功能，以适应现代文档排版的需求，如支持 HTML 和 EPUB 输出、增强图形处理能力等。同时，随着人工智能技术的发展，也出现了一些基于 AI 的 LaTeX 辅助工具，如自动生成 LaTeX 代码、自动纠错等，进一步提高了 LaTeX 的易用性。
+
+\subsection{LaTeX 特色功能展示}
+为了直观展示 LaTeX 相较于传统排版工具（如 Word）的优势，本节列举了三个在理工科论文中极具代表性的功能示例。
+
+\subsubsection{复杂数学公式的美观排版}
+LaTeX 最核心的优势在于其对数学公式的完美支持，无需鼠标点击即可通过代码生成复杂的数学结构。例如，高斯积分与矩阵运算的混合排版：
+
+\begin{equation}
+    I = \int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi} \quad \text{且} \quad 
+    \mathbf{A}^{-1} = \frac{1}{\det(\mathbf{A})} \begin{bmatrix}
+    C_{11} & \cdots & C_{n1} \\
+    \vdots & \ddots & \vdots \\
+    C_{1n} & \cdots & C_{nn}
+    \end{bmatrix}
+    \label{eq:complex_math}
+\end{equation}
+公式~\eqref{eq:complex_math} 展示了积分符号、根号、分数以及矩阵的完美结合，且自动分配了公式编号。
+
+\subsubsection{专业的三线表制作}
+学术界普遍推崇“三线表”格式。在 LaTeX 中，利用 \texttt{booktabs} 宏包可以轻松实现这种简洁优雅的表格风格：
+
+\begin{table}[htbp]
+    \centering
+    \caption{不同机器学习模型的性能对比}
+    \label{tab:ml_performance}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{模型名称} & \textbf{准确率 (Acc)} & \textbf{召回率 (Recall)} & \textbf{F1 分数} \\
+        \midrule
+        Logistic Regression & 85.4\% & 82.1\% & 0.837 \\
+        Random Forest       & 89.2\% & 88.5\% & 0.888 \\
+        \textbf{Proposed Method} & \textbf{94.5\%} & \textbf{93.8\%} & \textbf{0.941} \\
+        \bottomrule
+    \end{tabular}
+    \tablesource{注：加粗项表示本文提出的改进算法在各项指标上均取得了最优结果。}
+\end{table}
+
+\subsubsection{代码语法高亮}
+对于计算机相关专业的论文，展示算法代码是必不可少的。LaTeX 支持多种编程语言的语法高亮，以下是一个 Python 算法示例：
+
+\begin{lstlisting}[language=Python, caption={快速排序算法 (Python 实现)}]
+def quick_sort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x > pivot]
+    return quick_sort(left) + middle + quick_sort(right)
+
+# 测试代码
+print(quick_sort([3,6,8,10,1,2,1]))
+\end{lstlisting}
+\section{参考文献引用示例}
+
+参考文献引用是学术论文中的重要组成部分，正确的引用格式有助于读者查找和验证引用的文献。以下是一些常见的参考文献引用格式示例：
+
+\subsection{基本引用格式}
+
+近年来，随着高校对学术规范要求的不断提高，如何高效、规范地完成学位论文排版成为广大师生关注的焦点\cite{王强2020}。王强指出，传统 Word 排版在复杂公式、交叉引用及文献管理方面存在明显短板，而基于 TeX 的 LaTeX 系统则以其卓越的稳定性与可扩展性，被越来越多的高校推荐为官方排版工具\cite{张明2023}。张明等通过对比实验发现，使用 LaTeX 排版一篇 100 页的硕士论文，平均可节省 6～8 小时的后期调格式时间，且最终 PDF 在字体嵌入、图像分辨率及目录链接等方面的合规率均显著优于 Word 输出\cite{Smith2021}。此外，Smith 的研究进一步证实，LaTeX 的“内容与格式分离”理念有助于培养学生的结构化写作思维，降低因频繁调整格式而导致的逻辑断裂风险\cite{李华2021}。李华在对华南地区 5 所高校的调研中发现，超过 75 \% 的研究生在采用 LaTeX 模板后，其论文首次送审通过率提升 12 \% 以上，且审稿专家对公式、图表及参考文献一致性的满意度评分平均提高 1.8 分（5 分制）\cite{陈静2021}。
+
+区块链技术在供应链管理中的应用也得到了广泛关注\cite{赵亮2022}。王丽的研究探讨了人工智能在医疗领域的应用现状与展望\cite{王丽2019}。刘杰等深入研究了大数据分析与挖掘技术\cite{刘杰2020}。刘强在人民日报上发表了关于数字经济引领经济高质量发展的文章\cite{刘强2023}。中国互联网协会发布了中国互联网发展报告\cite{中国互联网协会2022}。
+
+在深度学习领域，Brown 等提出了 GPT-3 模型，展示了语言模型的强大能力\cite{Brown2020}。Goodfellow 等的《Deep Learning》一书成为深度学习领域的经典教材\cite{Goodfellow2016}。Li 等对联邦学习进行了全面综述\cite{Li2022}。Wang 等则研究了物联网边缘计算技术\cite{Wang2023}。
+
+综上所述，LaTeX 不仅是一种排版工具，更是一种保障学术质量、提升写作效率的系统性解决方案，值得在高校范围内进一步推广与深化应用。
+
+
+
+
+
+%论文为虚构,仅为展示使用%%%%%%%%%%%%%
+\clearpage\addcontentsline{toc}{section}{参考文献} % 添加到目录
+\bibliography{references} % 加载 .bib 文件
+%%%%%%%%%%%%%%%%不用改动
+
+\nocite{*}      % 显示所有参考文献，即使未被引用,如果你只想引用时显示,请删除
+
+
+%%%%%%附录
+
+\appendix       %开始附录部分
+\phantomsection % 手动添加锚点，确保超链接正确
+
+\section{第一个附录}
+这是附录 A 的内容，主要补充正文中未展开的实验细节与数据。以下给出数字功率谱密度（PSD）的经典估计公式，并配合实验图表加以说明。
+
+\subsection{数字功率谱密度估计}
+对于离散时间序列 $x[n]$，其功率谱密度可通过周期图法估计：
+\begin{equation}\label{eq:psd}
+\hat{S}_{xx}(\mathrm{e}^{\mathrm{j}\omega})=\frac{1}{2\pi N}\left|\sum_{n=0}^{N-1}x[n]\,\mathrm{e}^{-\mathrm{j}\omega n}\right|^{2},
+\end{equation}
+其中 $N$ 为采样点数，$\omega\in[-\pi,\pi]$ 为归一化角频率。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.6\textwidth]{example-image}
+  \caption{实测信号与周期图法得到的功率谱密度曲线}
+  \label{fig:A1}
+\end{figure}
+
+\subsection{实验参数与结果对比}
+表~\ref{tab:psd-params} 列出了三种窗函数下的 PSD 估计性能指标。可见，Blackman 窗在旁瓣衰减与主瓣宽度之间取得了较好平衡。
+
+\vspace{1cm}
+\begin{table}[h]
+  \centering
+  \caption{不同窗函数下 PSD 估计性能对比}
+  \label{tab:psd-params}
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{窗函数} & \textbf{主瓣宽度 (bins)} & \textbf{旁瓣衰减 (dB)} & \textbf{方差减小因子} \\
+    \midrule
+    Rectangular & 2 & 13 & 1.00 \\
+    Hanning & 4 & 31 & 0.75 \\
+    Blackman & 6 & 57 & 0.58 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{小结}
+附录 A 结合公式~\eqref{eq:psd}、图~\ref{fig:A1} 与表~\ref{tab:psd-params}，完整展示了数字功率谱密度估计的实验流程与结果，为正文的理论分析提供了数据支撑。
+
+
+%%%%%%%%%%%%%%%%%致谢
+\acknowledgement
+
+感谢trae和qwen，实力强劲；
+感谢读者，提供了宝贵的反馈和建议；
+至此，已经修改了大部分的格式问题。\\
+修改了一些细节问题----2026.1.22
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
